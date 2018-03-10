@@ -5,20 +5,18 @@
 package seahorseTest
 
 import java.io.FileNotFoundException
+import java.sql.Timestamp
 
-import ai.deepsense.commons.types.ColumnType
 import ai.deepsense.deeplang.DOperation.Id
 import ai.deepsense.deeplang.doperables.dataframe.DataFrame
-import ai.deepsense.deeplang.doperables.report.Report
 import ai.deepsense.deeplang.params.validators.AcceptAllRegexValidator
 import ai.deepsense.deeplang.params.{Param, Params, StringParam}
 import ai.deepsense.deeplang.refl.Register
 import ai.deepsense.deeplang.{DOperation0To1, ExecutionContext}
-import ai.deepsense.reportlib.model.{ReportContent, ReportType, Table}
 import com.amazonaws.services.s3.AmazonS3ClientBuilder
 import org.apache.spark.sql.Row
 import org.apache.spark.sql.types._
-import java.sql.Timestamp
+
 import scala.collection.JavaConversions._
 import scala.reflect.runtime.universe
 
@@ -35,8 +33,7 @@ final class ListS3BucketObjects extends DOperation0To1[DataFrame] with Params {
 
   val bucket = StringParam(
     "bucket",
-    Some("S3 bucket to list"),
-    new AcceptAllRegexValidator()
+    Some("S3 bucket to list")
   )
   def getBucket: String = $(bucket)
   def setBucket(value: String): this.type = set(bucket, value)
@@ -44,8 +41,7 @@ final class ListS3BucketObjects extends DOperation0To1[DataFrame] with Params {
 
   val prefix = StringParam(
     "prefix",
-    Some("S3 key prefix"),
-    new AcceptAllRegexValidator()
+    Some("S3 key prefix")
   )
   def getPrefix: String = $(prefix)
   def setPrefix(value: String): this.type = set(prefix, value)
